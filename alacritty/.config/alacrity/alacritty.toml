@@ -1,0 +1,22 @@
+import = [
+  "~/.config/alacritty/catppuccin-mocha.toml"
+]
+
+[shell]
+program = "/opt/homebrew/bin/bash"
+args = ["-l"]
+
+[env]
+TERM = "xterm-256color" 
+
+[window]
+padding.x = 10
+padding.y = 10
+decorations = "Buttonless"
+opacity = 0.5
+blur = true
+option_as_alt = "Both"
+
+[font]
+normal.family = "MesloLGS Nerd Font Mono"
+size = 14

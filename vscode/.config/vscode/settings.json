@@ -1,0 +1,15 @@
+{
+    "workbench.colorTheme": "Tokyo Night",
+    "git.confirmSync": false,
+    "editor.minimap.enabled": false,
+    "editor.formatOnSave": true,
+    "terminal.integrated.profiles.osx": {
+        "bash": {
+            "path": "/opt/homebrew/bin/bash",
+            "args": [
+                "-l"
+            ]
+        }
+    },
+    "terminal.integrated.defaultProfile.osx": "bash"
+}
