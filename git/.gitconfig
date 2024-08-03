@@ -1,0 +1,15 @@
+[user]
+	name = Chris Gradwohl
+	email = 15326707+cgradwohl@users.noreply.github.com
+
+[includeIf "gitdir:~/PlayQ/"]
+	path = ~/.gitconfig-cgradwohl-playq
+
+[includeIf "gitdir:~/PlayQ-DevOps/"]
+	path = ~/.gitconfig-cgradwohl-playq
+
+[init]
+	defaultBranch = main
+
+[core]
+	sshCommand = "ssh -i ~/.ssh/id_ed25519_cgradwohl"
