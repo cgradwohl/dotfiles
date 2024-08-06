@@ -1,7 +1,6 @@
 [user]
 	name = Chris Gradwohl
 	email = 15326707+cgradwohl@users.noreply.github.com
+
 [core]
 	sshCommand = ssh -i ~/.ssh/id_ed25519_cgradwohl
-[init]
-	defaultBranch = main
