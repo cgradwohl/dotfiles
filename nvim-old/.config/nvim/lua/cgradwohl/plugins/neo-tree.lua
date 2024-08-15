@@ -7,7 +7,7 @@ return {
     'MunifTanjim/nui.nvim',
   },
   config = function()
-    require('neo-tree').setup {
+    require('nvim-oldm.config.nvim.lua.cgradwohl.plugins.neo-tree').setup {
       filesystem = {
         filtered_items = {
           visible = true,
