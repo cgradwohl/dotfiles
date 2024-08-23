@@ -1,8 +1,10 @@
 [user]
-    name = Chris Gradwohl
-    email = 175059153+cgradwohl-playq@users.noreply.github.com
-    signingkey = ~/.ssh/id_ed25519_cgradwohl-playq.pub
+	name = Chris Gradwohl
+	email = 175059153+cgradwohl-playq@users.noreply.github.com
+	signingkey = ~/.ssh/id_ed25519_cgradwohl-playq.pub
 [core]
 	sshCommand = ssh -i ~/.ssh/id_ed25519_cgradwohl-playq
+[commit]
+	gpgsign = true
 [gpg]
-    format = ssh
+	format = ssh

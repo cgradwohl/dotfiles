@@ -4,5 +4,7 @@
 	signingkey = ~/.ssh/id_ed25519_cgradwohl.pub
 [core]
 	sshCommand = ssh -i ~/.ssh/id_ed25519_cgradwohl
+[commit]
+	gpgsign = true
 [gpg]
 	format = ssh
