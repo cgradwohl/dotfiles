@@ -1,10 +1,10 @@
 [user]
 	name = Chris Gradwohl
 	email = 15326707+cgradwohl@users.noreply.github.com
-	signingkey = ~/.ssh/id_ed25519_cgradwohl.pub
+	signingKey = ~/.ssh/id_ed25519_cgradwohl.pub
 [core]
 	sshCommand = ssh -i ~/.ssh/id_ed25519_cgradwohl
 [commit]
-	gpgsign = true
+	gpgSign = true
 [gpg]
 	format = ssh
