@@ -1,7 +1,7 @@
 [user]
 	name = Chris Gradwohl
 	email = 15326707+cgradwohl@users.noreply.github.com
-	signingKey = ~/.ssh/id_ed25519_cgradwohl.pub
+	signingKey = ~/.ssh/id_ed25519_cgradwohl
 [core]
 	sshCommand = ssh -i ~/.ssh/id_ed25519_cgradwohl
 [commit]
