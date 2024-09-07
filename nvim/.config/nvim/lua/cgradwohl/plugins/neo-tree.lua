@@ -14,12 +14,12 @@ return {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal' },
   },
   config = function()
-    require("neo-tree").setup({ 
+    require("neo-tree").setup({
       filesystem = {
         filtered_items = {
           visible = false,
           show_hidden_count = true,
-       	  hide_dotfiles = false,
+          hide_dotfiles = false,
         },
         window = {
           mappings = {
