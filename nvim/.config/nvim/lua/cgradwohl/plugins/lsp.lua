@@ -193,6 +193,7 @@ return {
                         },
                     },
                 },
+                marksman = {},
                 terraformls = {},
                 tflint = {},
             }
