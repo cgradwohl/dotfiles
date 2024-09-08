@@ -43,7 +43,6 @@ return {
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
       { '<F7>', dapui.toggle, desc = 'Debug: See last session result.' },
----@diagnostic disable-next-line: deprecated
       unpack(keys),
     }
   end,
@@ -102,5 +101,5 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
-  end
+  end,
 }
