@@ -22,3 +22,6 @@ alias idea="open -na 'IntelliJ IDEA Ultimate.app'"
 alias pycharm="open -na 'PyCharm Professional Edition.app'"
 alias tf="terraform"
 alias tfdoc="terraform-docs markdown table --output-file README.md --output-mode inject"
+
+# init
+neofetch
