@@ -1,0 +1,10 @@
+[user]
+	name = Chris Gradwohl
+	email = 180879193+sudospark@users.noreply.github.com
+	signingKey = ~/.ssh/sudospark.pub
+[core]
+	sshCommand = ssh -i ~/.ssh/sudospark
+[commit]
+	gpgSign = true
+[gpg]
+	format = ssh

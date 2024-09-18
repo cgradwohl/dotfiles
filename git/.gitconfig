@@ -7,3 +7,5 @@
 [includeIf "gitdir:~/CGradwohl/**"]
 	path = ~/.gitconfig-cgradwohl
 
+[includeIf "gitdir:~/cloudspark.io/**"]
+	path = ~/.gitconfig-sudospark
