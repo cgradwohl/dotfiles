@@ -12,6 +12,10 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # alias
+alias playqsession="aws sso login --sso-session playq"
+alias cgradwohlsession="aws sso login --sso-session cgradwohl"
+alias cloudsparksession="aws sso login --sso-session cloudspark"
+
 alias gc="git commit -m"
 alias gca="git commit -am"
 alias goland="open -na 'GoLand.app'"
@@ -25,3 +29,4 @@ alias tfdoc="terraform-docs markdown table --output-file README.md --output-mode
 
 # init
 neofetch
+
