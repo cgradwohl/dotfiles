@@ -18,12 +18,9 @@ end
 
 require("lazy").setup({
     spec = {
-        -- import your plugins
         { import = "cgradwohl.astro" },
-        { import = "cgradwohl.astrocommunity" },
         { import = "cgradwohl.plugins" },
     },
-    -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.
     install = { colorscheme = { "catppuccin" } },
     -- automatically check for plugin updates
