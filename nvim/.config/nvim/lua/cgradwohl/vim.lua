@@ -13,3 +13,5 @@ vim.filetype.add {
         ["~/%.config/foo/.*"] = "fooscript",
     },
 }
+
+vim.opt_local.columns = 80

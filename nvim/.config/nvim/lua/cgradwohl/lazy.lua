@@ -18,6 +18,7 @@ end
 
 require("lazy").setup({
     spec = {
+        -- ensure astro loads first so everthing is happy
         { import = "cgradwohl.astro" },
         { import = "cgradwohl.plugins" },
     },
