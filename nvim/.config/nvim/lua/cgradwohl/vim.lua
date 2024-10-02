@@ -14,4 +14,9 @@ vim.filetype.add {
     },
 }
 
-vim.opt_local.columns = 80
+vim.opt.number = true             -- optional - helps visually verify that it's working
+vim.opt.textwidth = 0
+vim.opt.wrapmargin = 0
+vim.opt.wrap = true
+vim.opt.linebreak = true          -- optional - breaks by word rather than character
+vim.opt.columns = 80              -- this is the important part
