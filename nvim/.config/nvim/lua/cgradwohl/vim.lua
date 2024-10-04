@@ -13,4 +13,4 @@ vim.filetype.add {
         ["~/%.config/foo/.*"] = "fooscript",
     },
 }
-
+vim.opt.conceallevel = 1

@@ -8,6 +8,8 @@ return {
   opts = {
     ensure_installed = {
       "lua",
+      "markdown",
+      "markdown_inline",
       "vim",
       -- add more arguments for adding more treesitter parsers
     },
