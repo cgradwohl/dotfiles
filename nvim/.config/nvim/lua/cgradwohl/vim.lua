@@ -8,16 +8,17 @@ vim.filetype.add {
     },
     filename = {
         ["Foofile"] = "fooscript",
+        ["~/.kube/config"] = "yaml",
     },
     pattern = {
         ["~/%.config/foo/.*"] = "fooscript",
     },
 }
+
 vim.opt.conceallevel = 1
--- vim.opt.wrap = true
 vim.opt.textwidth = 80
-
-
-vim.cmd([[
-  autocmd BufRead,BufNewFile ~/.kube/config set filetype=yaml
-]])
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.autoindent = true
