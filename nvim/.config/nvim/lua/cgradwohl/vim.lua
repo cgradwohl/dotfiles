@@ -14,3 +14,10 @@ vim.filetype.add {
     },
 }
 vim.opt.conceallevel = 1
+-- vim.opt.wrap = true
+vim.opt.textwidth = 80
+
+
+vim.cmd([[
+  autocmd BufRead,BufNewFile ~/.kube/config set filetype=yaml
+]])
