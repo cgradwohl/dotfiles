@@ -14,18 +14,13 @@ return {
   dependencies = {
     -- Required.
     "nvim-lua/plenary.nvim",
-
-    -- see below for full list of optional dependencies 👇
   },
   opts = {
     ui = {
       enable = false
     },
     workspaces = {
-        path = "~/CGradwohl/NoteBox",
-      },
+      path = "~/CGradwohl/NoteBox",
     },
-
-    -- see below for full list of options 👇
   },
 }
