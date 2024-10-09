@@ -20,7 +20,10 @@ return {
       enable = false
     },
     workspaces = {
-      path = "~/CGradwohl/NoteBox",
+      {
+        name = "NoteBox"
+        path = "~/CGradwohl/NoteBox",
+      }
     },
   },
 }
