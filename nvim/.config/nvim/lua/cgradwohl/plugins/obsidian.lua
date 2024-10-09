@@ -22,8 +22,6 @@ return {
       enable = false
     },
     workspaces = {
-      {
-        name = "personal",
         path = "~/CGradwohl/NoteBox",
       },
     },
