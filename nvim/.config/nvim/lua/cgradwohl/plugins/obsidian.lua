@@ -21,9 +21,9 @@ return {
     },
     workspaces = {
       {
-        name = "NoteBox"
+        name = "NoteBox",
         path = "~/CGradwohl/NoteBox",
-      }
+      },
     },
   },
 }
