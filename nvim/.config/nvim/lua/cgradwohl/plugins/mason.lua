@@ -4,6 +4,7 @@ local ensure_installed = {
   "tflint",
   "yamlls"
 }
+
 return {
   -- use mason-lspconfig to configure LSP installations
   {
