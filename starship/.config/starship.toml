@@ -13,6 +13,7 @@ symbol = " "
 
 [character]
 disabled = false
+# vimcmd_symbol = '[V](bold green) '
 # success_symbol = "[](green) "
 # error_symbol = "[](maroon) "
 

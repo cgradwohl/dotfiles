@@ -1,7 +1,10 @@
 return {
   "AstroNvim/astrolsp",
+  -- this configures the nvim-lspconfig plugin
+  -- opts.servers.[lspname] == opts.config.[lspname]
   opts = {
     config = {
+      terraformls = {},
       -- the key is the server name to configure
       -- the value is the configuration table
       yamlls = {
