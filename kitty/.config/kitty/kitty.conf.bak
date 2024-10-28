@@ -12,9 +12,3 @@ window_padding_width 10
 background_blur 1
 background_opacity 0.84
 hide_window_decorations titlebar-and-corners
-
-
-# BEGIN_KITTY_THEME
-# Eldritch
-include current-theme.conf
-# END_KITTY_THEME
