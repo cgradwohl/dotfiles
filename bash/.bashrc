@@ -30,7 +30,7 @@ alias tf="terraform"
 alias tfdoc="terraform-docs markdown table --output-file README.md --output-mode inject"
 
 # init
-neofetch
+fastfetch
 
 
 export NVM_DIR="$HOME/.config/nvm"
