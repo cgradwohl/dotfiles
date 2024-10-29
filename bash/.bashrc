@@ -12,8 +12,8 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # alias
-alias cgradwohlsession="aws sso login --sso-session cgradwohl"
-alias cloudsparksession="aws sso login --sso-session cloudspark"
+alias cgs="aws sso login --sso-session cgradwohl"
+alias css="aws sso login --sso-session cloudspark"
 alias dot="cd ~/CGradwohl/dotfiles"
 alias gc="git commit -m"
 alias gca="git commit -am"
@@ -24,14 +24,13 @@ alias gs="git status"
 alias idea="open -na 'IntelliJ IDEA Ultimate.app'"
 alias k="kubectl"
 alias nb="cd ~/CGradwohl/NoteBox"
-alias playqsession="aws sso login --sso-session playq"
+alias pqs="aws sso login --sso-session playq"
 alias pycharm="open -na 'PyCharm Professional Edition.app'"
 alias tf="terraform"
 alias tfdoc="terraform-docs markdown table --output-file README.md --output-mode inject"
 
 # init
 fastfetch
-
 
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
