@@ -72,7 +72,9 @@ return {
 				end,
 			},
 		})
-		-- a convenient way of auto-installing/updating packages by using an ensure_installed table (which Mason doesn't provide) from the mason registry only
+		-- a convenient way of auto-installing/updating packages by usingan
+		-- an ensure_installed table (which Mason doesn't provide) from the
+		-- mason registry only
 		require("mason-tool-installer").setup({
 			ensure_installed = {
 				"prettier",
