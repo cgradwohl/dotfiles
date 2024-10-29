@@ -4,6 +4,14 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Sync clipboard between OS and Neovim.
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+vim.schedule(function()
+    vim.opt.clipboard = 'unnamedplus'
+end)
+
 -- thanks ThePrimeagen
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -21,6 +29,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
+vim.opt.textwidth = 80 -- auto wrap while typing
 
 -- thanks ThePrimeagen
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
