@@ -1,16 +1,17 @@
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
-		{'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'},
-		{'williamboman/mason.nvim'},
-		{'williamboman/mason-lspconfig.nvim'},
-		{'L3MON4D3/LuaSnip'},
-		{'hrsh7th/nvim-cmp'},
-		{'hrsh7th/cmp-nvim-lsp'},
-		{'hrsh7th/cmp-buffer'},
-		{'hrsh7th/cmp-path'},
-		{'saadparwaiz1/cmp_luasnip'},
-		{'rafamadriz/friendly-snippets'}
+		{ "VonHeikemen/lsp-zero.nvim", branch = "v4.x" },
+		{ "williamboman/mason.nvim" },
+		{ "williamboman/mason-lspconfig.nvim" },
+		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+		{ "L3MON4D3/LuaSnip" },
+		{ "hrsh7th/nvim-cmp" },
+		{ "hrsh7th/cmp-nvim-lsp" },
+		{ "hrsh7th/cmp-buffer" },
+		{ "hrsh7th/cmp-path" },
+		{ "saadparwaiz1/cmp_luasnip" },
+		{ "rafamadriz/friendly-snippets" },
 	},
 	init = function()
 		-- Reserve a space in the gutter
@@ -38,15 +39,15 @@ return {
 		-- 	end,
 		-- })
 
-		local lspconfig_defaults = require('lspconfig').util.default_config
+		local lspconfig_defaults = require("lspconfig").util.default_config
 		lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-			'force',
+			"force",
 			lspconfig_defaults.capabilities,
-			require('cmp_nvim_lsp').default_capabilities()
+			require("cmp_nvim_lsp").default_capabilities()
 		)
 
-		require('mason').setup({})
-		require('mason-lspconfig').setup({
+		require("mason").setup({})
+		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"lua_ls",
 			},
@@ -54,39 +55,50 @@ return {
 				-- this first function is the "default handler"
 				-- it applies to every language server without a "custom handler"
 				function(server_name)
-					require('lspconfig')[server_name].setup({})
+					require("lspconfig")[server_name].setup({})
 				end,
 				["lua_ls"] = function()
 					local lspconfig = require("lspconfig")
-					lspconfig.lua_ls.setup {
+					lspconfig.lua_ls.setup({
 						settings = {
 							Lua = {
 								runtime = { version = "Lua 5.1" },
 								diagnostics = {
 									globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
-								}
-							}
-						}
-					}
-				end
-			}
+								},
+							},
+						},
+					})
+				end,
+			},
+		})
+		-- a convenient way of auto-installing/updating packages by using an ensure_installed table (which Mason doesn't provide) from the mason registry only
+		require("mason-tool-installer").setup({
+			ensure_installed = {
+				"prettier",
+				"stylua",
+				"isort",
+				"black",
+				"pylint",
+				"eslint_d",
+			},
 		})
 
-		local lsp_zero = require('lsp-zero')
+		local lsp_zero = require("lsp-zero")
 
-		local cmp = require('cmp')
+		local cmp = require("cmp")
 		local cmp_action = lsp_zero.cmp_action()
 
 		-- this is the function that loads the extra snippets
 		-- from rafamadriz/friendly-snippets
-		require('luasnip.loaders.from_vscode').lazy_load()
+		require("luasnip.loaders.from_vscode").lazy_load()
 
 		cmp.setup({
 			sources = {
-				{name = 'path'},
-				{name = 'nvim_lsp'},
-				{name = 'luasnip', keyword_length = 2},
-				{name = 'buffer', keyword_length = 3},
+				{ name = "path" },
+				{ name = "nvim_lsp" },
+				{ name = "luasnip", keyword_length = 2 },
+				{ name = "buffer", keyword_length = 3 },
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
@@ -94,27 +106,27 @@ return {
 			},
 			snippet = {
 				expand = function(args)
-					require('luasnip').lsp_expand(args.body)
+					require("luasnip").lsp_expand(args.body)
 				end,
 			},
 			mapping = cmp.mapping.preset.insert({
 				-- confirm completion item
-				['<Enter>'] = cmp.mapping.confirm({ select = true }),
+				["<Enter>"] = cmp.mapping.confirm({ select = true }),
 
 				-- trigger completion menu
-				['<C-Space>'] = cmp.mapping.complete(),
+				["<C-Space>"] = cmp.mapping.complete(),
 
 				-- scroll up and down the documentation window
-				['<C-u>'] = cmp.mapping.scroll_docs(-4),
-				['<C-d>'] = cmp.mapping.scroll_docs(4),
+				["<C-u>"] = cmp.mapping.scroll_docs(-4),
+				["<C-d>"] = cmp.mapping.scroll_docs(4),
 
 				-- navigate between snippet placeholders
-				['<C-f>'] = cmp_action.luasnip_jump_forward(),
-				['<C-b>'] = cmp_action.luasnip_jump_backward(),
+				["<C-f>"] = cmp_action.luasnip_jump_forward(),
+				["<C-b>"] = cmp_action.luasnip_jump_backward(),
 			}),
 			-- note: if you are going to use lsp-kind (another plugin)
 			-- replace the line below with the function from lsp-kind
-			formatting = lsp_zero.cmp_format({details = true}),
+			formatting = lsp_zero.cmp_format({ details = true }),
 		})
-	end
+	end,
 }

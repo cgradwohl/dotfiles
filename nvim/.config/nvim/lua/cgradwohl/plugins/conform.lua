@@ -22,8 +22,8 @@ return {
             json = { "prettier" },
             yaml = { "prettier" },
             markdown = { "prettier" },
-            -- lua = { "stylua" },
-            -- python = { "isort", "black" },
+            lua = { "stylua" },
+            python = { "isort", "black" },
         },
         default_format_opts = {
             lsp_format = "fallback",
