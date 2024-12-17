@@ -50,6 +50,8 @@ return {
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"lua_ls",
+				"terraformls",
+				"tflint",
 			},
 			handlers = {
 				-- this first function is the "default handler"
@@ -70,13 +72,28 @@ return {
 						},
 					})
 				end,
+				["terraformls"] = function()
+					require("lspconfig").terraformls.setup({})
+					-- Format *.tf and *.tfvars files on save
+					vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+						pattern = { "*.tf", "*.tfvars" },
+						callback = function()
+							vim.lsp.buf.format()
+						end,
+					})
+				end,
+				["tflint"] = function()
+					require("lspconfig").tflint.setup({})
+				end,
 			},
 		})
-		-- a convenient way of auto-installing/updating packages by usingan
+		-- a convenient way of auto-installing/updating packages by using
 		-- an ensure_installed table (which Mason doesn't provide) from the
 		-- mason registry only
 		require("mason-tool-installer").setup({
 			ensure_installed = {
+				"tflint",
+				"terraform-ls",
 				"prettier",
 				"stylua",
 				"isort",
