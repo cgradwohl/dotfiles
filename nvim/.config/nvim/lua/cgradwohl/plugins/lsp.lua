@@ -52,6 +52,7 @@ return {
 				"lua_ls",
 				"terraformls",
 				"tflint",
+				"gopls",
 			},
 			handlers = {
 				-- this first function is the "default handler"
@@ -100,6 +101,7 @@ return {
 				"black",
 				"pylint",
 				"eslint_d",
+				"gopls",
 			},
 		})
 
