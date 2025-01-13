@@ -40,3 +40,7 @@ export NVM_DIR="$HOME/.config/nvm"
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/CGradwohl/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# not sure how this got here ?
+export PATH="$PATH:$HOME/.local/bin"
+
