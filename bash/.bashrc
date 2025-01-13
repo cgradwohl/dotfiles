@@ -28,7 +28,7 @@ alias pqs="aws sso login --sso-session playq"
 alias pycharm="open -na 'PyCharm Professional Edition.app'"
 alias tf="terraform"
 alias tfdoc="terraform-docs markdown table --output-file README.md --output-mode inject"
-alias tftest = "AWS_SDK_LOAD_CONFIG=1 TF_VAR_region=us-east-1 AWS_PROFILE=terratest go test -v -timeout 30m"
+alias tftest="AWS_SDK_LOAD_CONFIG=1 TF_VAR_region=us-east-1 AWS_PROFILE=terratest go test -v -timeout 30m"
 
 # init
 fastfetch
