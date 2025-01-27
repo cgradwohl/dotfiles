@@ -76,12 +76,12 @@ return {
 				["terraformls"] = function()
 					require("lspconfig").terraformls.setup({})
 					-- Format *.tf and *.tfvars files on save
-					vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-						pattern = { "*.tf", "*.tfvars" },
-						callback = function()
-							vim.lsp.buf.format()
-						end,
-					})
+					-- 	vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+					-- 		pattern = { "*.tf", "*.tfvars" },
+					-- 		callback = function()
+					-- 			vim.lsp.buf.format()
+					-- 		end,
+					-- 	})
 				end,
 				["tflint"] = function()
 					require("lspconfig").tflint.setup({})
