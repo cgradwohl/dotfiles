@@ -66,18 +66,18 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- make a bash script executable from vim!
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
-vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=terraform]])
+-- vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
+-- vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=terraform]])
 -- vim.cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]])
 -- vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
-vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
+-- vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
 
 -- File Types
-vim.filetype.add({
-	extension = {
-		tfvars = "terraform-vars",
-	},
-})
+-- vim.filetype.add({
+-- 	extension = {
+-- 		tfvars = "terraform-vars",
+-- 	},
+-- })
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
