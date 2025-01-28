@@ -74,14 +74,17 @@ return {
 					})
 				end,
 				["terraformls"] = function()
-					require("lspconfig").terraformls.setup({})
+					require("lspconfig").terraformls.setup({
+						-- ensures the LSP server attaches to both *.tf and *.tfvars buffers
+						filetypes = { "terraform", "terraform-vars" },
+					})
 					-- Format *.tf and *.tfvars files on save
-					-- 	vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-					-- 		pattern = { "*.tf", "*.tfvars" },
-					-- 		callback = function()
-					-- 			vim.lsp.buf.format()
-					-- 		end,
-					-- 	})
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						pattern = { "*.tf", "*.tfvars" },
+						callback = function()
+							vim.lsp.buf.format({ async = false })
+						end,
+					})
 				end,
 				["tflint"] = function()
 					require("lspconfig").tflint.setup({})

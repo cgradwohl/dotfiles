@@ -99,3 +99,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		})
 	end,
 })
+
+-- File Types
+vim.filetype.add({
+	extension = {
+		tfvars = "terraform-vars",
+	},
+})
