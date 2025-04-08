@@ -45,4 +45,3 @@ export PATH="/Users/CGradwohl/.rd/bin:$PATH"
 
 # not sure how this got here ?
 export PATH="$PATH:$HOME/.local/bin"
-
