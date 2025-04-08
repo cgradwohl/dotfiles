@@ -10,6 +10,7 @@ return {
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-buffer" },
 		{ "hrsh7th/cmp-path" },
+		{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 		{ "saadparwaiz1/cmp_luasnip" },
 		{ "rafamadriz/friendly-snippets" },
 	},
@@ -49,10 +50,11 @@ return {
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = {
+				"gopls",
 				"lua_ls",
+				"pyright",
 				"terraformls",
 				"tflint",
-				"gopls",
 			},
 			handlers = {
 				-- this first function is the "default handler"
@@ -71,6 +73,29 @@ return {
 								},
 							},
 						},
+					})
+				end,
+				["pyright"] = function()
+					require("lspconfig").pyright.setup({
+						settings = {
+							python = {
+								analysis = {
+									autoSearchPath = true,
+									useLibraryCodeForTypes = true,
+									diagnosticMode = "workspace", -- or "openFilesOnly" for faster performance
+									typeCheckingMode = "basic", -- "off", "basic", or "strict"
+								},
+							},
+						},
+					})
+
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						pattern = "*.py",
+						callback = function()
+							-- vim.lsp.buf.format({ async = false }) -- If using an LSP formatter
+							-- Alternatively, use black directly:
+							vim.cmd(":!black %")
+						end,
 					})
 				end,
 				["terraformls"] = function()
@@ -96,15 +121,17 @@ return {
 		-- mason registry only
 		require("mason-tool-installer").setup({
 			ensure_installed = {
-				"tflint",
-				"terraform-ls",
-				"prettier",
-				"stylua",
-				"isort",
 				"black",
-				"pylint",
 				"eslint_d",
 				"gopls",
+				"isort",
+				"mypy",
+				"prettier",
+				"pyright",
+				"ruff",
+				"stylua",
+				"terraform-ls",
+				"tflint",
 			},
 		})
 
@@ -119,10 +146,11 @@ return {
 
 		cmp.setup({
 			sources = {
-				{ name = "path" },
-				{ name = "nvim_lsp" },
-				{ name = "luasnip", keyword_length = 2 },
-				{ name = "buffer", keyword_length = 3 },
+				{ name = "nvim_lsp", priority = 1000 },
+				{ name = "nvim_lsp_signature_help" },
+				{ name = "luasnip", keyword_length = 2, priority = 750 },
+				{ name = "buffer", keyword_length = 3, priority = 500 },
+				{ name = "path", priority = 250 },
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
