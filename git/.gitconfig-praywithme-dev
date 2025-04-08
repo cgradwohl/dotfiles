@@ -1,0 +1,10 @@
+[user]
+	name = Christopher S Gradwohl
+	email = 204137020+praywithme-dev@users.noreply.github.com 
+	signingKey = ~/.ssh/praywithme-dev.pub
+[core]
+	sshCommand = ssh -i ~/.ssh/praywithme-dev
+[commit]
+	gpgSign = true
+[gpg]
+	format = ssh
