@@ -87,6 +87,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = event.buf, desc = "Go to declaration" })
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = event.buf, desc = "Go to implementation" })
 		vim.keymap.set("n", "go", vim.lsp.buf.type_definition, { buffer = event.buf, desc = "Go to type definition" })
+		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = event.buf, desc = "Jump to next diagnostic" })
+		vim.keymap.set(
+			"n",
+			"[d",
+			vim.diagnostic.goto_prev,
+			{ buffer = event.buf, desc = "Jump to previous diagnostic" }
+		)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = event.buf, desc = "Show references" })
 		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { buffer = event.buf, desc = "Show signature help" })
 		vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { buffer = event.buf, desc = "Rename symbol" })
