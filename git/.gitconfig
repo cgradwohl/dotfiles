@@ -13,6 +13,6 @@
 [includeIf "gitdir:~/pray-with-me/**"]
 	path = ~/.gitconfig-praywithme-dev
 
-[user]
-	name = Chris Gradwohl
-	email = 15326707+cgradwohl@users.noreply.github.com
+; [user]
+	; name = Chris Gradwohl
+	; email = 15326707+cgradwohl@users.noreply.github.com
