@@ -44,33 +44,38 @@ return {
 		-- Git-related keymaps (only if git is executable)
 		if vim.fn.executable("git") == 1 then
 			keymap.set("n", "<leader>gb", function()
-				require("telescope.builtin").git_branches { use_file_path = true }
+				require("telescope.builtin").git_branches({ use_file_path = true })
 			end, { desc = "Git branches" })
 
 			keymap.set("n", "<leader>gc", function()
-				require("telescope.builtin").git_commits { use_file_path = true }
+				require("telescope.builtin").git_commits({ use_file_path = true })
 			end, { desc = "Git commits (repository)" })
 
 			keymap.set("n", "<leader>gC", function()
-				require("telescope.builtin").git_bcommits { use_file_path = true }
+				require("telescope.builtin").git_bcommits({ use_file_path = true })
 			end, { desc = "Git commits (current file)" })
 
 			keymap.set("n", "<leader>gt", function()
-				require("telescope.builtin").git_status { use_file_path = true }
+				require("telescope.builtin").git_status({ use_file_path = true })
 			end, { desc = "Git status" })
 		end
 
 		-- General Telescope keymaps
 		keymap.set("n", "<leader>f<CR>", "<cmd>Telescope resume<cr>", { desc = "Resume previous search" })
 		keymap.set("n", "<leader>f'", "<cmd>Telescope marks<cr>", { desc = "Find marks" })
-		keymap.set("n", "<leader>f/", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Find words in current buffer" })
+		keymap.set(
+			"n",
+			"<leader>f/",
+			"<cmd>Telescope current_buffer_fuzzy_find<cr>",
+			{ desc = "Find words in current buffer" }
+		)
 
 		keymap.set("n", "<leader>fa", function()
-			require("telescope.builtin").find_files {
+			require("telescope.builtin").find_files({
 				prompt_title = "Config Files",
 				cwd = vim.fn.stdpath("config"),
 				follow = true,
-			}
+			})
 		end, { desc = "Find AstroNvim config files" })
 
 		keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find buffers" })
@@ -79,7 +84,7 @@ return {
 		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 
 		keymap.set("n", "<leader>fF", function()
-			require("telescope.builtin").find_files { hidden = true, no_ignore = true }
+			require("telescope.builtin").find_files({ hidden = true, no_ignore = true })
 		end, { desc = "Find all files" })
 
 		keymap.set("n", "<leader>fg", "<cmd>Telescope git_files<cr>", { desc = "Find git files" })
@@ -93,7 +98,7 @@ return {
 		keymap.set("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Find registers" })
 
 		keymap.set("n", "<leader>ft", function()
-			require("telescope.builtin").colorscheme { enable_preview = true, ignore_builtins = true }
+			require("telescope.builtin").colorscheme({ enable_preview = true, ignore_builtins = true })
 		end, { desc = "Find themes" })
 
 		-- Live Grep (only if ripgrep is executable)
@@ -101,11 +106,11 @@ return {
 			keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", { desc = "Find words" })
 
 			keymap.set("n", "<leader>fW", function()
-				require("telescope.builtin").live_grep {
-					additional_args = function(args)
-						return vim.list_extend(args, { "--hidden", "--no-ignore" })
+				require("telescope.builtin").live_grep({
+					additional_args = function(_args)
+						return { "--hidden", "--no-ignore" }
 					end,
-				}
+				})
 			end, { desc = "Find words in all files" })
 		end
 
