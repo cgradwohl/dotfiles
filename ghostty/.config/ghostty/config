@@ -1,5 +1,6 @@
 # theme = catppuccin-mocha
-theme = rose-pine-dawn
+# theme = rose-pine-dawn
+theme = voilet-light
 font-family = MesloLGS Nerd Font Mono
 font-size = 14
 window-padding-x = 10
