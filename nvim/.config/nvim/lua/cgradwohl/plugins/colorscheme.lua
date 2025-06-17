@@ -23,10 +23,37 @@
 --     end
 -- }
 -- lua/plugins/rose-pine.lua
+-- return {
+-- 	"rose-pine/neovim",
+-- 	name = "rose-pine-dawn",
+-- 	config = function()
+-- 		vim.cmd("colorscheme rose-pine")
+-- 	end,
+-- }
+
+-- return {
+-- 	"morhetz/gruvbox",
+-- 	name = "gruvbox-light",
+-- 	config = function()
+-- 		vim.o.background = "light"
+-- 		vim.cmd("colorscheme gruvbox")
+-- 	end,
+-- }
+
 return {
-	"rose-pine/neovim",
-	name = "rose-pine-dawn",
+	"sainnhe/gruvbox-material",
+	name = "gruvbox-material",
 	config = function()
-		vim.cmd("colorscheme rose-pine")
+		-- Set background (light or dark)
+		vim.o.background = "light" -- or "dark"
+
+		-- Optional: set contrast (choices: 'hard', 'medium', 'soft')
+		vim.g.gruvbox_material_background = "soft"
+
+		-- Optional: enable true color support
+		vim.o.termguicolors = true
+
+		-- Load the colorscheme
+		vim.cmd("colorscheme gruvbox-material")
 	end,
 }
