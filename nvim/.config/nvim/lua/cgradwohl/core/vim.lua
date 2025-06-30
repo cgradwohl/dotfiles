@@ -79,11 +79,12 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- 	},
 -- })
 
-vim.filetype.add({
-	pattern = {
-		["*.yml.j2"] = "yaml",
-		["*.yaml.j2"] = "yaml",
-	},
+-- force *.yml.j2 to be treated as plain yaml
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "*.yml.j2", "*.yaml.j2" },
+	callback = function(ctx)
+		vim.bo[ctx.buf].filetype = "yaml"
+	end,
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
