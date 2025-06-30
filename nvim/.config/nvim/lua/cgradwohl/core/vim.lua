@@ -79,6 +79,14 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- 	},
 -- })
 
+vim.filetype.add({
+	pattern = {
+		["*.j2"] = "jinja",
+		["*.yml.j2"] = "jinja",
+		["*.yaml.j2"] = "jinja",
+	},
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(event)
 		-- Use direct Lua functions for consistency and performance
