@@ -55,6 +55,7 @@ return {
 				"pyright",
 				"terraformls",
 				"tflint",
+				"yamlls",
 			},
 			automatic_enable = false,
 			handlers = {
@@ -117,6 +118,17 @@ return {
 				end,
 				["tflint"] = function()
 					require("lspconfig").tflint.setup({})
+				end,
+				["yamlls"] = function()
+					require("lspconfig").yamlls.setup({
+						-- optionally tell yamlls to ignore jinja templating
+						settings = {
+							yaml = {
+								schemaStore = { enable = true },
+								format = { enable = true },
+							},
+						},
+					})
 				end,
 			},
 		})
