@@ -81,9 +81,8 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.filetype.add({
 	pattern = {
-		["*.j2"] = "jinja",
-		["*.yml.j2"] = "yaml",
-		["*.yaml.j2"] = "yaml",
+		["*.yml.j2"] = "yaml.ansible",
+		["*.yaml.j2"] = "yaml.ansible",
 	},
 })
 
