@@ -4,6 +4,7 @@
 	signingkey = ~/.ssh/id_ed25519_cgradwohl-playq.pub
 [core]
 	sshCommand = ssh -i ~/.ssh/id_ed25519_cgradwohl-playq
+    editor = "nvim"
 [commit]
 	gpgsign = true
 [gpg]
