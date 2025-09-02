@@ -32,6 +32,12 @@ vim.opt.colorcolumn = "80"
 vim.opt.textwidth = 80 -- auto wrap while typing
 vim.opt.conceallevel = 1
 
+-- FOLDING
+vim.opt_local.foldmethod = "indent"
+vim.opt_local.foldlevel = 1
+vim.keymap.set("n", "zj", ':lua NavigateFold("j")<CR>')
+vim.keymap.set("n", "zk", ':lua NavigateFold("k")<CR>')
+
 -- thanks ThePrimeagen
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 -- move blocks of text
