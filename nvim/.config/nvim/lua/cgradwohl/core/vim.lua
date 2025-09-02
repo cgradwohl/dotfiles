@@ -33,10 +33,33 @@ vim.opt.textwidth = 80 -- auto wrap while typing
 vim.opt.conceallevel = 1
 
 -- FOLDING
-vim.opt_local.foldmethod = "indent"
-vim.opt_local.foldlevel = 1
-vim.keymap.set("n", "zj", ':lua NavigateFold("j")<CR>')
-vim.keymap.set("n", "zk", ':lua NavigateFold("k")<CR>')
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 1
+
+function NavigateFold(direction)
+	local cmd = "normal! " .. direction
+	local view = vim.fn.winsaveview()
+	local lnum = view.lnum
+	local new_lnum = lnum
+	local open = true
+
+	while lnum == new_lnum or open do
+		vim.cmd(cmd)
+		new_lnum = vim.fn.line(".")
+		open = vim.fn.foldclosed(new_lnum) < 0
+	end
+
+	if open then
+		vim.fn.winrestview(view)
+	end
+end
+
+vim.keymap.set("n", "zj", function()
+	NavigateFold("j")
+end, { buffer = true })
+vim.keymap.set("n", "zk", function()
+	NavigateFold("k")
+end, { buffer = true })
 
 -- thanks ThePrimeagen
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
