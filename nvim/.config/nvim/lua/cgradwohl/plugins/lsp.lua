@@ -124,6 +124,16 @@ return {
 						-- optionally tell yamlls to ignore jinja templating
 						settings = {
 							yaml = {
+								schemas = {
+									kubernetes = "k8s-*.yaml",
+									["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+									["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+									["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/**/*.{yml,yaml}",
+									["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+									["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+									["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+									["http://json.schemastore.org/circleciconfig"] = ".circleci/**/*.{yml,yaml}",
+								},
 								schemaStore = { enable = true },
 								format = { enable = true },
 							},
@@ -160,6 +170,26 @@ return {
 		-- from rafamadriz/friendly-snippets
 		require("luasnip.loaders.from_vscode").lazy_load()
 
+		-- cmp.setup.buffer({
+		-- 	sources = {
+		-- 		{ name = "luasnip", priority = 90 },
+		-- 		{ name = "nvim_lsp" },
+		-- 		{ name = "path" },
+		-- 		{
+		-- 			name = "buffer",
+		-- 			option = {
+		-- 				get_bufnrs = function()
+		-- 					local bufs = {}
+		-- 					for _, win in ipairs(vim.api.nvim_list_wins()) do
+		-- 						bufs[vim.api.nvim_win_get_buf(win)] = true
+		-- 					end
+		-- 					return vim.tbl_keys(bufs)
+		-- 				end,
+		-- 			},
+		-- 		},
+		-- 	},
+		-- })
+		--
 		cmp.setup({
 			sources = {
 				{ name = "nvim_lsp", priority = 1000 },
