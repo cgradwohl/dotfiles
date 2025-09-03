@@ -19,7 +19,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
-vim.opt.smartindent = true
+vim.opt.smartindent = false
 vim.opt.wrap = false
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
@@ -34,6 +34,7 @@ vim.opt.conceallevel = 1
 
 -- FOLDING
 vim.opt.foldmethod = "indent"
+vim.opt.foldenable = false
 vim.opt.foldlevel = 1
 
 function NavigateFold(direction)
