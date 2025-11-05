@@ -14,15 +14,6 @@ repositories:
   certFile: ""
   insecure_skip_tls_verify: false
   keyFile: ""
-  name: grafana
-  pass_credentials_all: false
-  password: ""
-  url: https://grafana.github.io/helm-charts
-  username: ""
-- caFile: ""
-  certFile: ""
-  insecure_skip_tls_verify: false
-  keyFile: ""
   name: datadog
   pass_credentials_all: false
   password: ""
@@ -45,4 +36,13 @@ repositories:
   pass_credentials_all: false
   password: ""
   url: https://aws.github.io/secrets-store-csi-driver-provider-aws
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: grafana
+  pass_credentials_all: false
+  password: ""
+  url: https://grafana.github.io/helm-charts
   username: ""
