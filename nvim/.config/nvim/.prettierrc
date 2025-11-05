@@ -1,6 +1,0 @@
-proseWrap: always
-overrides:
-  - files: "*.md"
-    options:
-      proseWrap: always
-      printWidth: 80

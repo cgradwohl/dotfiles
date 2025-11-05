@@ -156,3 +156,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		})
 	end,
 })
+
+-- format on save
+-- use conform to format-on-save only for MD and YAML
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = { "*.md", "*.markdown", "*.yml", "*.yaml" },
+	callback = function(args)
+		require("conform").format({
+			bufnr = args.buf,
+			async = false, -- format synchronously before the write completes
+			lsp_format = "fallback", -- use LSP only if no external formatter configured
+			timeout_ms = 1500, -- raise if your formatter is slow
+		})
+	end,
+})

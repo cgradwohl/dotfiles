@@ -23,20 +23,22 @@ return {
 			markdown = { "prettier" },
 			lua = { "stylua" },
 			python = { "isort", "black" },
+			yaml = { "prettier" },
 		},
 		default_format_opts = {
 			lsp_format = "fallback",
 		},
-		format_on_save = { timeout_ms = 500 },
+		-- format_on_save = { timeout_ms = 500 },
 		-- Customize formatters
 		formatters = {
 			prettier = {
 				prepend_args = function()
-					return {
-						"--write",
-						"--config",
-						string.format("%s", vim.fn.expand("~/.config/nvim/.prettierrc")),
-					}
+					local fname = vim.api.nvim_buf_get_name(0)
+					if fname == "" then
+						-- fallback: use a reasonable filename if buffer is unnamed
+						fname = "file.md"
+					end
+					return { "--stdin-filepath", fname, "--config", vim.fn.expand("~/.config/nvim/.prettierrc.yaml") }
 				end,
 			},
 		},

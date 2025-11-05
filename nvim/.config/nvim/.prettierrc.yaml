@@ -1,0 +1,20 @@
+# sensible defaults — keeps prose alone unless you opt in
+printWidth: 80        # preferred line length for code and prose wrapping threshold
+tabWidth: 2           # use 2 spaces (common for JS/MD/YAML)
+useTabs: false
+singleQuote: false    # keep double quotes (yaml prefers double quotes)
+trailingComma: none   # avoid trailing commas (safer across formats)
+bracketSpacing: true
+arrowParens: always
+endOfLine: lf
+
+# For Markdown, you can allow Prettier to wrap paragraphs to printWidth if you want.
+# use proseWrap: 'preserve' to avoid reflowing existing paragraphs automatically.
+proseWrap: always
+
+# proseWrap: always
+# overrides:
+#   - files: "*.md"
+#     options:
+#       proseWrap: always
+#       printWidth: 80
