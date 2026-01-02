@@ -13,7 +13,7 @@ eval "$(pyenv virtualenv-init -)"
 
 # alias
 alias aer="cd ~/CGradwohl/aerform.com"
-alias cgs="aws sso login --sso-session cgradwohl"
+alias cg="aws sso login --sso-session cgradwohl"
 alias css="aws sso login --sso-session cloudspark"
 alias dot="cd ~/CGradwohl/dotfiles"
 alias gaa="git add ."
