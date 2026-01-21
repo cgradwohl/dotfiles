@@ -1,7 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
-		{ "VonHeikemen/lsp-zero.nvim", branch = "v4.x" },
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
 		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
@@ -14,273 +13,199 @@ return {
 		{ "saadparwaiz1/cmp_luasnip" },
 		{ "rafamadriz/friendly-snippets" },
 	},
-	init = function()
-		-- Reserve a space in the gutter
-		-- This will avoid an annoying layout shift in the screen
-		--
-		-- NOTE: I added this to cgradwohl.vim
-		-- vim.opt.signcolumn = 'yes'
-	end,
 	config = function()
-		-- NOTE: I moved this to cgradwohl.vim
-		-- vim.api.nvim_create_autocmd('LspAttach', {
-		-- 	callback = function(event)
-		-- 		local opts = {buffer = event.buf}
-		--
-		-- 		vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-		-- 		vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-		-- 		vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-		-- 		vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-		-- 		vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-		-- 		vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-		-- 		vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-		-- 		vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-		-- 		vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-		-- 		vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-		-- 	end,
-		-- })
-
-		local lspconfig_defaults = require("lspconfig").util.default_config
-		lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+		local capabilities = vim.tbl_deep_extend(
 			"force",
-			lspconfig_defaults.capabilities,
+			vim.lsp.protocol.make_client_capabilities(),
 			require("cmp_nvim_lsp").default_capabilities()
 		)
 
-		require("mason").setup({})
+		------------------------------------------------------------
+		-- Server Configurations (using modern vim.lsp.config API)
+		------------------------------------------------------------
+
+		vim.lsp.config("lua_ls", {
+			capabilities = capabilities,
+			settings = {
+				Lua = {
+					runtime = { version = "Lua 5.1" },
+					diagnostics = { globals = { "bit", "vim", "it", "describe", "before_each", "after_each" } },
+				},
+			},
+		})
+
+		vim.lsp.config("ts_ls", {
+			capabilities = capabilities,
+			settings = {
+				typescript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHints = true,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+				javascript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHints = true,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+			},
+		})
+
+		vim.lsp.config("eslint", {
+			capabilities = capabilities,
+			settings = { workingDirectories = { mode = "auto" } },
+		})
+
+		vim.lsp.config("tailwindcss", {
+			capabilities = capabilities,
+			filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+			settings = {
+				tailwindCSS = {
+					experimental = {
+						classRegex = {
+							{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+							{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+						},
+					},
+				},
+			},
+		})
+
+		vim.lsp.config("cssls", {
+			capabilities = capabilities,
+			settings = {
+				css = { validate = true, lint = { unknownAtRules = "ignore" } },
+				scss = { validate = true },
+			},
+		})
+
+		vim.lsp.config("html", {
+			capabilities = capabilities,
+			filetypes = { "html", "htmldjango" },
+		})
+
+		vim.lsp.config("pyright", {
+			capabilities = capabilities,
+			settings = {
+				python = {
+					venvPath = ".",
+					venv = "venv",
+					pythonPath = "venv/bin/python",
+					analysis = {
+						autoSearchPath = true,
+						useLibraryCodeForTypes = true,
+						diagnosticMode = "workspace",
+						typeCheckingMode = "basic",
+					},
+				},
+			},
+		})
+
+		vim.lsp.config("terraformls", {
+			capabilities = capabilities,
+			filetypes = { "terraform", "terraform-vars" },
+		})
+
+		vim.lsp.config("yamlls", {
+			capabilities = capabilities,
+			settings = {
+				yaml = {
+					schemas = {
+						kubernetes = "k8s-*.yaml",
+						["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+						["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+						["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/**/*.{yml,yaml}",
+						["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+						["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+						["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+						["http://json.schemastore.org/circleciconfig"] = ".circleci/**/*.{yml,yaml}",
+					},
+					schemaStore = { enable = true },
+					format = { enable = true },
+				},
+			},
+		})
+
+		-- Servers with default settings just need capabilities
+		for _, server in ipairs({ "gopls", "tflint" }) do
+			vim.lsp.config(server, { capabilities = capabilities })
+		end
+
+		------------------------------------------------------------
+		-- Mason Setup (installs servers, automatic_enable handles the rest)
+		------------------------------------------------------------
+
+		require("mason").setup()
+
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"cssls",
-                "eslint",
-                "gopls",
-                "html",
+				"eslint",
+				"gopls",
+				"html",
 				"lua_ls",
 				"pyright",
-                "tailwindcss",
+				"tailwindcss",
 				"terraformls",
 				"tflint",
-                "ts_ls",
+				"ts_ls",
 				"yamlls",
 			},
-			automatic_enable = true,
-			handlers = {
-				-- this first function is the "default handler"
-				-- it applies to every language server without a "custom handler"
-				function(server_name)
-					require("lspconfig")[server_name].setup({})
-				end,
-				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
-					lspconfig.lua_ls.setup({
-						settings = {
-							Lua = {
-								runtime = { version = "Lua 5.1" },
-								diagnostics = {
-									globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
-								},
-							},
-						},
-					})
-				end,
-				["eslint"] = function()
-					require("lspconfig").eslint.setup({
-						filetypes = {
-							"javascript",
-							"javascriptreact",
-							"javascript.jsx",
-							"typescript",
-							"typescriptreact",
-							"typescript.tsx",
-						},
-						settings = {
-							workingDirectories = { mode = "auto" },
-						},
-						on_attach = function(client, bufnr)
-							-- Auto-fix ESLint issues on save
-							vim.api.nvim_create_autocmd("BufWritePre", {
-								buffer = bufnr,
-								command = "EslintFixAll",
-							})
-						end,
-					})
-				end,
-				["tailwindcss"] = function()
-					require("lspconfig").tailwindcss.setup({
-						filetypes = {
-							"html",
-							"css",
-							"scss",
-							"javascript",
-							"javascriptreact",
-							"typescript",
-							"typescriptreact",
-						},
-						settings = {
-							tailwindCSS = {
-								experimental = {
-									classRegex = {
-										{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-										{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-									},
-								},
-							},
-						},
-					})
-				end,
-				["cssls"] = function()
-					require("lspconfig").cssls.setup({
-						settings = {
-							css = { validate = true, lint = { unknownAtRules = "ignore" } },
-							scss = { validate = true },
-						},
-					})
-				end,
-				["html"] = function()
-					require("lspconfig").html.setup({
-						filetypes = { "html", "htmldjango" },
-					})
-				end,
-				["pyright"] = function()
-					require("lspconfig").pyright.setup({
-						settings = {
-							python = {
-								venvPath = ".",
-								venv = "venv",
-								pythonPath = "venv/bin/python",
-								analysis = {
-									autoSearchPath = true,
-									useLibraryCodeForTypes = true,
-									diagnosticMode = "workspace", -- or "openFilesOnly" for faster performance
-									typeCheckingMode = "basic", -- "off", "basic", or "strict"
-								},
-							},
-						},
-					})
-					-- Note: Python formatting (isort + black) is handled by conform.nvim
-				end,
-				["terraformls"] = function()
-					require("lspconfig").terraformls.setup({
-						-- ensures the LSP server attaches to both *.tf and *.tfvars buffers
-						filetypes = { "terraform", "terraform-vars" },
-					})
-					-- Format *.tf and *.tfvars files on save
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						pattern = { "*.tf", "*.tfvars" },
-						callback = function()
-							vim.lsp.buf.format({ async = false })
-						end,
-					})
-				end,
-				["tflint"] = function()
-					require("lspconfig").tflint.setup({})
-				end,
-				["ts_ls"] = function()
-					require("lspconfig").ts_ls.setup({
-						filetypes = {
-							"typescript",
-							"typescriptreact",
-							"typescript.tsx",
-							"javascript",
-							"javascriptreact",
-							"javascript.jsx",
-						},
-						settings = {
-							typescript = {
-								inlayHints = {
-									includeInlayParameterNameHints = "all",
-									includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-									includeInlayFunctionParameterTypeHints = true,
-									includeInlayVariableTypeHints = true,
-									includeInlayPropertyDeclarationTypeHints = true,
-									includeInlayFunctionLikeReturnTypeHints = true,
-									includeInlayEnumMemberValueHints = true,
-								},
-							},
-							javascript = {
-								inlayHints = {
-									includeInlayParameterNameHints = "all",
-									includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-									includeInlayFunctionParameterTypeHints = true,
-									includeInlayVariableTypeHints = true,
-									includeInlayPropertyDeclarationTypeHints = true,
-									includeInlayFunctionLikeReturnTypeHints = true,
-									includeInlayEnumMemberValueHints = true,
-								},
-							},
-						},
-					})
-				end,
-				["yamlls"] = function()
-					require("lspconfig").yamlls.setup({
-						-- optionally tell yamlls to ignore jinja templating
-						settings = {
-							yaml = {
-								schemas = {
-									kubernetes = "k8s-*.yaml",
-									["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
-									["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
-									["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/**/*.{yml,yaml}",
-									["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
-									["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
-									["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
-									["http://json.schemastore.org/circleciconfig"] = ".circleci/**/*.{yml,yaml}",
-								},
-								schemaStore = { enable = true },
-								format = { enable = true },
-							},
-						},
-					})
-				end,
-			},
+			automatic_enable = true, -- auto-enables servers via vim.lsp.enable()
 		})
-		-- a convenient way of auto-installing/updating packages by using
-		-- an ensure_installed table (which Mason doesn't provide) from the
-		-- mason registry only
+
 		require("mason-tool-installer").setup({
 			ensure_installed = {
 				"black",
 				"eslint_d",
-				"gopls",
 				"isort",
 				"mypy",
 				"prettier",
-				"pyright",
 				"ruff",
 				"stylua",
-				"terraform-ls",
-				"tflint",
 			},
 		})
 
-		local lsp_zero = require("lsp-zero")
+		------------------------------------------------------------
+		-- Autocommands
+		------------------------------------------------------------
 
-		local cmp = require("cmp")
-		local cmp_action = lsp_zero.cmp_action()
+		-- ESLint auto-fix on save
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+			callback = function()
+				vim.cmd("silent! EslintFixAll")
+			end,
+		})
 
-		-- this is the function that loads the extra snippets
-		-- from rafamadriz/friendly-snippets
+		-- Terraform format on save
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			pattern = { "*.tf", "*.tfvars" },
+			callback = function()
+				vim.lsp.buf.format({ async = false })
+			end,
+		})
+
+		------------------------------------------------------------
+		-- Completion Setup (nvim-cmp)
+		------------------------------------------------------------
+
 		require("luasnip.loaders.from_vscode").lazy_load()
 
-		-- cmp.setup.buffer({
-		-- 	sources = {
-		-- 		{ name = "luasnip", priority = 90 },
-		-- 		{ name = "nvim_lsp" },
-		-- 		{ name = "path" },
-		-- 		{
-		-- 			name = "buffer",
-		-- 			option = {
-		-- 				get_bufnrs = function()
-		-- 					local bufs = {}
-		-- 					for _, win in ipairs(vim.api.nvim_list_wins()) do
-		-- 						bufs[vim.api.nvim_win_get_buf(win)] = true
-		-- 					end
-		-- 					return vim.tbl_keys(bufs)
-		-- 				end,
-		-- 			},
-		-- 		},
-		-- 	},
-		-- })
-		--
+		local cmp = require("cmp")
+		local luasnip = require("luasnip")
+
 		cmp.setup({
 			sources = {
 				{ name = "nvim_lsp", priority = 1000 },
@@ -295,27 +220,40 @@ return {
 			},
 			snippet = {
 				expand = function(args)
-					require("luasnip").lsp_expand(args.body)
+					luasnip.lsp_expand(args.body)
 				end,
 			},
 			mapping = cmp.mapping.preset.insert({
-				-- confirm completion item
 				["<Enter>"] = cmp.mapping.confirm({ select = true }),
-
-				-- trigger completion menu
 				["<C-Space>"] = cmp.mapping.complete(),
-
-				-- scroll up and down the documentation window
 				["<C-u>"] = cmp.mapping.scroll_docs(-4),
 				["<C-d>"] = cmp.mapping.scroll_docs(4),
-
-				-- navigate between snippet placeholders
-				["<C-f>"] = cmp_action.luasnip_jump_forward(),
-				["<C-b>"] = cmp_action.luasnip_jump_backward(),
+				["<C-f>"] = cmp.mapping(function(fallback)
+					if luasnip.jumpable(1) then
+						luasnip.jump(1)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+				["<C-b>"] = cmp.mapping(function(fallback)
+					if luasnip.jumpable(-1) then
+						luasnip.jump(-1)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
 			}),
-			-- note: if you are going to use lsp-kind (another plugin)
-			-- replace the line below with the function from lsp-kind
-			formatting = lsp_zero.cmp_format({ details = true }),
+			formatting = {
+				format = function(entry, vim_item)
+					vim_item.menu = ({
+						nvim_lsp = "[LSP]",
+						luasnip = "[Snip]",
+						buffer = "[Buf]",
+						path = "[Path]",
+					})[entry.source.name]
+					return vim_item
+				end,
+			},
 		})
 	end,
 }
