@@ -55,6 +55,7 @@ return {
 				"pyright",
 				"terraformls",
 				"tflint",
+                "ts_ls",
 				"yamlls",
 			},
 			automatic_enable = false,

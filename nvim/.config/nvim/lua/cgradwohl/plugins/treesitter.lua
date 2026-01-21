@@ -19,6 +19,7 @@ return {
 				"html",
 				"hcl",
 				"terraform",
+                "typescript",
 				"yaml",
 			},
 			sync_install = false,
