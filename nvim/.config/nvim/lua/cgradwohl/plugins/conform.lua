@@ -15,14 +15,17 @@ return {
 	},
 	opts = {
 		formatters_by_ft = {
-			javascript = { "prettier" },
-			typescript = { "prettier" },
 			css = { "prettier" },
 			html = { "prettier" },
+			javascript = { "prettier" },
+			javascriptreact = { "prettier" },
 			json = { "prettier" },
-			markdown = { "prettier" },
 			lua = { "stylua" },
+			markdown = { "prettier" },
 			python = { "isort", "black" },
+			scss = { "prettier" },
+			typescript = { "prettier" },
+			typescriptreact = { "prettier" },
 			yaml = { "prettier" },
 		},
 		default_format_opts = {

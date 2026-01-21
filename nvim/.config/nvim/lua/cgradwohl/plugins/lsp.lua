@@ -62,7 +62,7 @@ return {
                 "ts_ls",
 				"yamlls",
 			},
-			automatic_enable = false,
+			automatic_enable = true,
 			handlers = {
 				-- this first function is the "default handler"
 				-- it applies to every language server without a "custom handler"
@@ -82,6 +82,64 @@ return {
 						},
 					})
 				end,
+				["eslint"] = function()
+					require("lspconfig").eslint.setup({
+						filetypes = {
+							"javascript",
+							"javascriptreact",
+							"javascript.jsx",
+							"typescript",
+							"typescriptreact",
+							"typescript.tsx",
+						},
+						settings = {
+							workingDirectories = { mode = "auto" },
+						},
+						on_attach = function(client, bufnr)
+							-- Auto-fix ESLint issues on save
+							vim.api.nvim_create_autocmd("BufWritePre", {
+								buffer = bufnr,
+								command = "EslintFixAll",
+							})
+						end,
+					})
+				end,
+				["tailwindcss"] = function()
+					require("lspconfig").tailwindcss.setup({
+						filetypes = {
+							"html",
+							"css",
+							"scss",
+							"javascript",
+							"javascriptreact",
+							"typescript",
+							"typescriptreact",
+						},
+						settings = {
+							tailwindCSS = {
+								experimental = {
+									classRegex = {
+										{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+										{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+									},
+								},
+							},
+						},
+					})
+				end,
+				["cssls"] = function()
+					require("lspconfig").cssls.setup({
+						settings = {
+							css = { validate = true, lint = { unknownAtRules = "ignore" } },
+							scss = { validate = true },
+						},
+					})
+				end,
+				["html"] = function()
+					require("lspconfig").html.setup({
+						filetypes = { "html", "htmldjango" },
+					})
+				end,
 				["pyright"] = function()
 					require("lspconfig").pyright.setup({
 						settings = {
@@ -98,15 +156,7 @@ return {
 							},
 						},
 					})
-
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						pattern = "*.py",
-						callback = function()
-							-- vim.lsp.buf.format({ async = false }) -- If using an LSP formatter
-							-- Alternatively, use black directly:
-							vim.cmd(":!black %")
-						end,
-					})
+					-- Note: Python formatting (isort + black) is handled by conform.nvim
 				end,
 				["terraformls"] = function()
 					require("lspconfig").terraformls.setup({
@@ -124,9 +174,42 @@ return {
 				["tflint"] = function()
 					require("lspconfig").tflint.setup({})
 				end,
-                ["ts_ls"] = function()
-                    require("lspconfig").ts_ls.setup({})
-                end,
+				["ts_ls"] = function()
+					require("lspconfig").ts_ls.setup({
+						filetypes = {
+							"typescript",
+							"typescriptreact",
+							"typescript.tsx",
+							"javascript",
+							"javascriptreact",
+							"javascript.jsx",
+						},
+						settings = {
+							typescript = {
+								inlayHints = {
+									includeInlayParameterNameHints = "all",
+									includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+									includeInlayFunctionParameterTypeHints = true,
+									includeInlayVariableTypeHints = true,
+									includeInlayPropertyDeclarationTypeHints = true,
+									includeInlayFunctionLikeReturnTypeHints = true,
+									includeInlayEnumMemberValueHints = true,
+								},
+							},
+							javascript = {
+								inlayHints = {
+									includeInlayParameterNameHints = "all",
+									includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+									includeInlayFunctionParameterTypeHints = true,
+									includeInlayVariableTypeHints = true,
+									includeInlayPropertyDeclarationTypeHints = true,
+									includeInlayFunctionLikeReturnTypeHints = true,
+									includeInlayEnumMemberValueHints = true,
+								},
+							},
+						},
+					})
+				end,
 				["yamlls"] = function()
 					require("lspconfig").yamlls.setup({
 						-- optionally tell yamlls to ignore jinja templating
