@@ -50,9 +50,13 @@ return {
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				"gopls",
+				"cssls",
+                "eslint",
+                "gopls",
+                "html",
 				"lua_ls",
 				"pyright",
+                "tailwindcss",
 				"terraformls",
 				"tflint",
                 "ts_ls",
