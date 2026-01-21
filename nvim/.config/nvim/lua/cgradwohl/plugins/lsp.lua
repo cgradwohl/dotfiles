@@ -124,6 +124,9 @@ return {
 				["tflint"] = function()
 					require("lspconfig").tflint.setup({})
 				end,
+                ["ts_ls"] = function()
+                    require("lspconfig").ts_ls.setup({})
+                end,
 				["yamlls"] = function()
 					require("lspconfig").yamlls.setup({
 						-- optionally tell yamlls to ignore jinja templating
