@@ -109,6 +109,13 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- 	},
 -- })
 
+-- Add OpenTofu filetype for .tofu files
+vim.filetype.add({
+	extension = {
+		tofu = "opentofu",
+	},
+})
+
 -- force *.yml.j2 to be treated as plain yaml
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = { "*.yml.j2", "*.yaml.j2", "*.yaml.tpl", "*.yml.tpl", "*.yaml.gotmpl", "*.yml.gotmpl" },

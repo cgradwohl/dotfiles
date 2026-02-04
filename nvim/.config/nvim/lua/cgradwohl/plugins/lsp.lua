@@ -117,6 +117,16 @@ return {
 			filetypes = { "terraform", "terraform-vars" },
 		})
 
+		vim.lsp.config("tofu_ls", {
+			capabilities = capabilities,
+			cmd = { "tofu-ls", "serve" },
+			filetypes = { "terraform", "terraform-vars", "opentofu" },
+			root_markers = { ".terraform", ".git" },
+		})
+
+		-- tofu-ls is not managed by Mason, enable it manually
+		vim.lsp.enable("tofu_ls")
+
 		vim.lsp.config("yamlls", {
 			capabilities = capabilities,
 			settings = {
@@ -194,6 +204,22 @@ return {
 			pattern = { "*.tf", "*.tfvars" },
 			callback = function()
 				vim.lsp.buf.format({ async = false })
+			end,
+		})
+
+		-- tofu-ls auto-format on save
+		vim.api.nvim_create_autocmd("LspAttach", {
+			callback = function(args)
+				local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+				if client.name == "tofu_ls" and client:supports_method("textDocument/formatting") then
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						group = vim.api.nvim_create_augroup("tofu-ls", { clear = false }),
+						buffer = args.buf,
+						callback = function()
+							vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+						end,
+					})
+				end
 			end,
 		})
 
