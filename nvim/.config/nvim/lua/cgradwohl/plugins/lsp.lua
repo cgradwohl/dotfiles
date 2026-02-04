@@ -120,7 +120,7 @@ return {
 		vim.lsp.config("tofu_ls", {
 			capabilities = capabilities,
 			cmd = { "tofu-ls", "serve" },
-			filetypes = { "terraform", "terraform-vars", "opentofu" },
+			filetypes = { "terraform", "terraform-vars" },
 			root_markers = { ".terraform", ".git" },
 		})
 

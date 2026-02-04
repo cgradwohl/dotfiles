@@ -110,9 +110,10 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- })
 
 -- Add OpenTofu filetype for .tofu files
+-- Map to 'terraform' so treesitter highlighting and LSP servers attach correctly
 vim.filetype.add({
 	extension = {
-		tofu = "opentofu",
+		tofu = "terraform",
 	},
 })
 
@@ -148,6 +149,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, { buffer = event.buf, desc = "Format buffer" })
 
 		-- Leader-based keybindings (consistent with above)
+		vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = event.buf, desc = "Show diagnostic float" })
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = event.buf, desc = "Rename variable" })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = event.buf, desc = "Show code actions" })
 	end,
