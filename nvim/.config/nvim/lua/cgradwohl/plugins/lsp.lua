@@ -127,8 +127,20 @@ return {
 		-- tofu-ls is not managed by Mason, enable it manually
 		vim.lsp.enable("tofu_ls")
 
+		vim.lsp.config("helm_ls", {
+			capabilities = capabilities,
+			settings = {
+				["helm-ls"] = {
+					yamlls = {
+						path = "yaml-language-server",
+					},
+				},
+			},
+		})
+
 		vim.lsp.config("yamlls", {
 			capabilities = capabilities,
+			filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
 			settings = {
 				yaml = {
 					schemas = {
@@ -163,6 +175,7 @@ return {
 				"cssls",
 				"eslint",
 				"gopls",
+				"helm_ls",
 				"html",
 				"lua_ls",
 				"pyright",

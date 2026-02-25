@@ -12,6 +12,7 @@ return {
 				"go",
 				"hcl",
 				"heex",
+				"helm",
 				"html",
 				"javascript",
 				"jinja",
