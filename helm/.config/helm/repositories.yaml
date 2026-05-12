@@ -46,3 +46,12 @@ repositories:
   password: ""
   url: https://grafana.github.io/helm-charts
   username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: eks-charts
+  pass_credentials_all: false
+  password: ""
+  url: https://aws.github.io/eks-charts
+  username: ""
