@@ -29,3 +29,5 @@
 ; global settings
 [pull]
     rebase = false
+[user]
+	name = cgradwohl-playq
