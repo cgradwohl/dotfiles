@@ -13,6 +13,9 @@
 [includeIf "gitdir:~/pray-with-me/**"]
 	path = ~/.gitconfig-praywithme-dev
 
+[includeIf "gitdir:~/votive-plus/**"]
+	path = ~/.gitconfig-votive-plus
+
 ; [user]
 	; name = Chris Gradwohl
 	; email = 15326707+cgradwohl@users.noreply.github.com
